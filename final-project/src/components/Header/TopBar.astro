@@ -1,0 +1,127 @@
+---
+import SocialIcons from "./SocialIcons.astro";
+
+interface ContactInfo {
+  id: string;
+  label: string;
+  value: string;
+  type: "phone" | "location" | "hours" | "email";
+}
+
+const contactInfo: ContactInfo[] = [
+  {
+    id: "emergency",
+    label: "For emergency cases:",
+    value: "800 123 45 67",
+    type: "phone",
+  },
+  {
+    id: "location",
+    label: "Location:",
+    value: "121 Wallstreet Street, NY, USA",
+    type: "location",
+  },
+  {
+    id: "hours",
+    label: "Open hours:",
+    value: "9:00-24:00 Mon-Sat",
+    type: "hours",
+  },
+  {
+    id: "email",
+    label: "Email:",
+    value: "info@Ddsgnr.com",
+    type: "email",
+  },
+];
+---
+
+<div class="top-bar">
+  <div class="top-bar-content">
+    <div class="contact-info">
+      {
+        contactInfo.map((item) => {
+          const value =
+            item.type === "email" ? (
+              <a href={`mailto:${item.value}`} class="value email-link">
+                {item.value}
+              </a>
+            ) : item.type === "phone" ? (
+              <a
+                href={`tel:${item.value.replace(/\s/g, "")}`}
+                class="value phone-link">
+                {item.value}
+              </a>
+            ) : (
+              <span class="value">{item.value}</span>
+            );
+
+          return (
+            <div class="contact-item text-small-normal" key={item.id}>
+              <span
+                class={`label ${item.type === "phone" ? "phone-label" : ""}`}>
+                {item.label}
+              </span>
+              {value}
+            </div>
+          );
+        })
+      }
+    </div>
+    <SocialIcons />
+  </div>
+</div>
+
+<style>
+  .top-bar {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-black);
+  }
+
+  .top-bar-content {
+    display: flex;
+    max-width: 1440px;
+    padding: 12px 0;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .contact-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-item {
+    display: flex;
+    padding: 0 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+  }
+
+  .contact-item + .contact-item {
+    border-left: 1px solid var(--color-kuno-grey);
+  }
+
+  .label.phone-label {
+    font-weight: 700;
+  }
+
+  .phone-link {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 992px) {
+    .contact-item {
+      padding: 0 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .top-bar {
+      display: none;
+    }
+  }
+</style>
