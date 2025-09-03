@@ -150,3 +150,8 @@ h6 {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
 }
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}

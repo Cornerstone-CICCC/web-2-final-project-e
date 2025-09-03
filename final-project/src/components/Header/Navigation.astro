@@ -1,0 +1,48 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navigationItems = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+---
+
+<nav class="nav">
+  {
+    navigationItems.map((item) => (
+      <a href={item.href} class={`nav-link text-regular-normal`}>
+        {item.label}
+      </a>
+    ))
+  }
+  <a href="/book" class="cta-button text-regular-normal"
+    >Book Your Appointment Now</a
+  >
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .cta-button {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 8px 20px;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      display: none;
+    }
+  }
+</style>
