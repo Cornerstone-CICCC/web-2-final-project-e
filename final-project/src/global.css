@@ -75,7 +75,9 @@ a {
   --color-neutral-dark-gray: #505050;
 
   --font-family-base: "Roboto", sans-serif;
+  --font-size-h1: 56px;
   --font-size-h2: 48px;
+  --font-size-h3: 40px;
   --font-size-h4: 32px;
   --font-size-h5: 24px;
   --font-size-h6: 20px;
@@ -97,8 +99,20 @@ body {
   background-color: var(--color-white);
 }
 
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
 h2 {
   font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
 }
@@ -154,6 +168,7 @@ h6 {
 .container {
   position: relative;
   max-width: 1440px;
+  padding: 0 64px;
   margin: 0 auto;
 }
 
