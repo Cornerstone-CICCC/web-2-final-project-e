@@ -1,0 +1,40 @@
+---
+const { variant = "black", label, isFullWidth, id } = Astro.props;
+---
+
+<button
+  id={id}
+  class={`btn btn-${variant} ${isFullWidth ? "btn-full-width" : ""}`}>
+  {label}
+</button>
+
+<style>
+  .btn {
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .btn-black {
+    color: var(--color-white);
+    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+  }
+
+  .btn-white {
+    color: var(--color-black);
+    border: 1px solid var(--color-white);
+    background-color: var(--color-white);
+  }
+
+  .btn-line {
+    color: var(--color-black);
+    border: 1px solid var(--color-black);
+    background-color: var(--color-white);
+  }
+
+  .btn-full-width {
+    width: 100%;
+  }
+</style>
