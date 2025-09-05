@@ -1,0 +1,87 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  type?: string;
+  name: string;
+  as?: "input" | "textarea" | "select";
+  options?: { value: string; label: string }[];
+  required?: boolean;
+}
+
+const {
+  id,
+  label,
+  type = "text",
+  name,
+  as = "input",
+  options = [],
+  required = false,
+} = Astro.props;
+---
+
+<div class="contact-form__group">
+  <label for={id} class="text-regular-normal contact-form__label">{label}</label
+  >
+
+  {
+    as === "textarea" ? (
+      <textarea
+        id={id}
+        name={name}
+        class="contact-form__textarea contact-form__input"
+        rows="5"
+        required={required}
+      />
+    ) : as === "select" ? (
+      <select
+        id={id}
+        name={name}
+        class="contact-form__select contact-form__input"
+        required={required}>
+        <option value="" disabled selected>
+          Select an option
+        </option>
+        {options.map(({ value, label }) => (
+          <option value={value}>{label}</option>
+        ))}
+      </select>
+    ) : (
+      <input
+        type={type}
+        id={id}
+        name={name}
+        class="contact-form__input"
+        required={required}
+      />
+    )
+  }
+</div>
+
+<style>
+  .contact-form__label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .contact-form__input,
+  .contact-form__textarea,
+  .contact-form__select {
+    width: 100%;
+    display: flex;
+    padding: 12px;
+    height: 48px;
+    border-radius: 5px;
+    border: 1px solid var(--color-black);
+    background: var(--color-white);
+  }
+
+  .contact-form__textarea {
+    height: 180px;
+  }
+
+  .contact-form__input:focus,
+  .contact-form__textarea:focus,
+  .contact-form__select:focus {
+  }
+</style>
