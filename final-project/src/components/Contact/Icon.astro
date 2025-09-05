@@ -1,0 +1,36 @@
+---
+import Email from "../../assets/svgs/contact_email.svg";
+import Chat from "../../assets/svgs/contact_chat.svg";
+import Phone from "../../assets/svgs/contact_phone.svg";
+import Office from "../../assets/svgs/contact_office.svg";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: "email" | "chat" | "phone" | "office";
+  className?: string;
+}
+
+const { name, className } = Astro.props;
+---
+
+<div class:list={["icon", className]}>
+  {name === "email" && <Image src={Email} alt="Email icon" />}
+  {name === "chat" && <Image src={Chat} alt="Chat icon" />}
+  {name === "phone" && <Image src={Phone} alt="Phone icon" />}
+  {name === "office" && <Image src={Office} alt="Office icon" />}
+</div>
+
+<style>
+  .icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+</style>
