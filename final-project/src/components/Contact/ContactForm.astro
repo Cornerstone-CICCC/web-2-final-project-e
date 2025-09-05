@@ -63,7 +63,7 @@ const fields = [
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
 
-      <form id="contact-form" class="contact-form" novalidate>
+      <form id="contact-form" class="contact-form">
         <div class="contact-form__grid">
           {fields.map((field) => <FormField {...field} />)}
         </div>
@@ -126,19 +126,15 @@ const fields = [
     gap: 80px;
     align-items: center;
   }
-
   .contact-section__title {
     margin-top: 16px;
   }
-
   .contact-section__form-container {
     flex: 0 1 50%;
   }
-
   .contact-section__description {
     margin-top: 24px;
   }
-
   .contact-form {
     margin-top: 32px;
   }
@@ -147,7 +143,6 @@ const fields = [
     grid-template-columns: 1fr 1fr;
     gap: 24px;
   }
-
   .contact-form__group--checkbox {
     display: flex;
     align-items: center;
@@ -181,7 +176,6 @@ const fields = [
       flex-direction: column;
       gap: 2rem;
     }
-
     .contact-form__grid {
       grid-template-columns: 1fr;
     }
@@ -191,29 +185,11 @@ const fields = [
   }
 </style>
 
-<script client:visible>
-  import { initEmail, sendEmail } from "../../lib/email";
+<script>
+  import { EmailForm } from "../../utils/email.ts";
 
-  const form = document.getElementById("contact-form");
-  const statusEl = document.getElementById("form-status");
-  const submitBtn = form.querySelector("button[type=submit]");
-
-  initEmail();
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    statusEl.textContent = "Sending...";
-
-    try {
-      await sendEmail(form);
-      statusEl.textContent = "✅ Your message has been sent successfully!";
-      form.reset();
-    } catch (err) {
-      statusEl.textContent = "❌ Failed to send message. Please try again.";
-      console.error(err);
-    } finally {
-      submitBtn.disabled = false;
-    }
+  document.addEventListener("DOMContentLoaded", () => {
+    const emailForm = new EmailForm("contact-form", "form-status");
+    emailForm.init();
   });
 </script>

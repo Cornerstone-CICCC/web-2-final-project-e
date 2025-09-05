@@ -1,5 +1,6 @@
 ---
 const {
+  type,
   variant = "black",
   label,
   isFullWidth,
@@ -9,6 +10,7 @@ const {
 ---
 
 <button
+  type={type}
   id={id}
   class={`btn btn-${variant} ${isFullWidth ? "btn-full-width" : ""} ${
     isMobileFullWidth ? "btn-mobile-full-width" : ""
