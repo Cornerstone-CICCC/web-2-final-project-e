@@ -1,10 +1,18 @@
 ---
-const { variant = "black", label, isFullWidth, id } = Astro.props;
+const {
+  variant = "black",
+  label,
+  isFullWidth,
+  id,
+  isMobileFullWidth,
+} = Astro.props;
 ---
 
 <button
   id={id}
-  class={`btn btn-${variant} ${isFullWidth ? "btn-full-width" : ""}`}>
+  class={`btn btn-${variant} ${isFullWidth ? "btn-full-width" : ""} ${
+    isMobileFullWidth ? "btn-mobile-full-width" : ""
+  }`}>
   {label}
 </button>
 
@@ -36,5 +44,11 @@ const { variant = "black", label, isFullWidth, id } = Astro.props;
 
   .btn-full-width {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .btn-mobile-full-width {
+      width: 100%;
+    }
   }
 </style>

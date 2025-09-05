@@ -94,6 +94,7 @@ const fields = [
           type="submit"
           class="contact-form__submit"
           label="Submit"
+          isMobileFullWidth={true}
         />
         <p
           id="form-status"
@@ -180,6 +181,7 @@ const fields = [
       flex-direction: column;
       gap: 2rem;
     }
+
     .contact-form__grid {
       grid-template-columns: 1fr;
     }
@@ -188,3 +190,30 @@ const fields = [
     }
   }
 </style>
+
+<script client:visible>
+  import { initEmail, sendEmail } from "../../lib/email";
+
+  const form = document.getElementById("contact-form");
+  const statusEl = document.getElementById("form-status");
+  const submitBtn = form.querySelector("button[type=submit]");
+
+  initEmail();
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    statusEl.textContent = "Sending...";
+
+    try {
+      await sendEmail(form);
+      statusEl.textContent = "✅ Your message has been sent successfully!";
+      form.reset();
+    } catch (err) {
+      statusEl.textContent = "❌ Failed to send message. Please try again.";
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
