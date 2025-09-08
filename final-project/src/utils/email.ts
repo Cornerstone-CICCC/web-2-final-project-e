@@ -4,6 +4,7 @@ export class EmailForm {
   private form: HTMLFormElement | null;
   private statusEl: HTMLParagraphElement | null;
   private submitBtn: HTMLButtonElement | null;
+  private clearTimer: number | undefined;
 
   private publicKey: string | undefined;
   private serviceId: string | undefined;
@@ -80,7 +81,19 @@ export class EmailForm {
 
   private setStatus(message: string, color: string) {
     if (!this.statusEl) return;
+
     this.statusEl.textContent = message;
     this.statusEl.style.color = color;
+    this.statusEl.style.display = "block";
+
+    if (this.clearTimer) {
+      window.clearTimeout(this.clearTimer);
+    }
+    this.clearTimer = window.setTimeout(() => {
+      if (!this.statusEl) return;
+      this.statusEl.textContent = "";
+      this.statusEl.style.color = "";
+      this.statusEl.style.display = "none";
+    }, 7000);
   }
 }
