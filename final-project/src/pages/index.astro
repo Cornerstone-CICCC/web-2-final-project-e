@@ -1,11 +1,39 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../global.css";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Hero from "../components/Hero/Hero.astro";
+import AboutSection from "../components/About/AboutSection.astro";
+import ServicesSection from "../components/Services/ServicesSection.astro";
+import ContactUs from "../components/Contact/ContactUs.astro";
+import Testimonials from "../components/Testimonials/Testimonials.astro";
+import FAQ from "../components/FAQ/FAQ.astro";
+import Team from "../components/Team/Team.astro";
+import Book from "../components/Book/Book.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Ddsgnr - Creative Design Agency"
+  description="Professional design agency specializing in web design, branding, and digital solutions"
+  currentPath="/">
+  <Hero />
+  <AboutSection />
+  <ServicesSection />
+  <ContactUs />
+  <div class="mobile-hidden">
+    <Team />
+  </div>
+  <Testimonials />
+  <FAQ />
+  <div class="mobile-hidden">
+    <Book />
+  </div>
+</BaseLayout>
+
+<style>
+  @media screen and (max-width: 768px) {
+    .mobile-hidden {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+import { Image } from "astro:assets";
+import Car from "../../assets/images/about_car_inside.jpg";
+import Button from "../Button/Button.astro";
+import FormField from "./FormField.astro";
+import { FORM_FIELDS } from "./data";
+---
+
+<div class="background">
+  <div class="container contact-section">
+    <div class="contact-section__form-container">
+      <p class="text-regular-semibold contact-section__tagline">Tagline</p>
+      <h2 class="contact-section__title">Contact us</h2>
+      <p class="text-medium-normal contact-section__description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+
+      <form id="contact-form" class="contact-form">
+        <div class="contact-form__grid">
+          {FORM_FIELDS.map((field) => <FormField {...field} />)}
+        </div>
+
+        <FormField
+          id="message"
+          label="Message"
+          name="message"
+          as="textarea"
+          required={false}
+        />
+
+        <div class="contact-form__group--checkbox">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            class="contact-form__checkbox"
+            required
+          />
+          <label for="terms" class="contact-form__label--checkbox">
+            I accept the <a href="" class="text-small-link">Terms</a>
+          </label>
+        </div>
+
+        <Button
+          variant="black"
+          type="submit"
+          class="contact-form__submit"
+          label="Submit"
+          isMobileFullWidth={true}
+        />
+        <p
+          id="form-status"
+          class="contact-form__status"
+          role="status"
+          aria-live="polite">
+        </p>
+      </form>
+    </div>
+
+    <div class="contact-section__image-container">
+      <Image
+        src={Car}
+        alt="Interior of a modern luxury car"
+        class="contact-section__image"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+
+<style>
+  .background {
+    background: var(--color-kuno-greywhite);
+  }
+
+  .contact-section {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-section__title {
+    margin-top: 16px;
+  }
+
+  .contact-section__form-container {
+    flex: 0 1 50%;
+  }
+
+  .contact-section__description {
+    margin-top: 24px;
+  }
+
+  .contact-form {
+    margin-top: 32px;
+  }
+
+  .contact-form__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .contact-form__group--checkbox {
+    display: flex;
+    align-items: center;
+    margin: 24px 0 40px;
+  }
+
+  .contact-form__checkbox {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-form__label--checkbox {
+    padding-left: 12px;
+  }
+
+  .contact-form__status {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+  }
+
+  .contact-section__image-container {
+    flex: 0 1 50%;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .contact-section__image {
+    width: 100%;
+    height: 838px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .contact-form__grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-section__image-container {
+      display: none;
+    }
+  }
+</style>
+
+<script src="./contact-form.ts"></script>

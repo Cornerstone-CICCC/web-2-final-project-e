@@ -1,0 +1,80 @@
+---
+import Button from "../Button/Button.astro";
+import { Image } from "astro:assets";
+import { BRAND_LIST } from "./data.ts";
+---
+
+<section class="brands">
+  <div class="container narrow brands__container">
+    <span class="text-medium-bold">We work on</span>
+    <h4>All Makes & Models</h4>
+
+    <ul class="brands__list" id="brands-list">
+      {
+        BRAND_LIST.map((b) => (
+          <li class="brands__item">
+            <Image class="brands__logo" src={b.logo} alt={`${b.name} logo`} />
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="brand__button">
+      <Button
+        type="button"
+        id="view-more-btn"
+        variant="line"
+        label="View more"
+        isFullWidth={true}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .brands__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .brands__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    max-width: 988px;
+  }
+
+  .brands__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brands__logo {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .brand__button {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .brands__list {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .brand__button {
+      display: flex;
+      width: 100%;
+    }
+  }
+</style>
+
+<script src="./brands.ts"></script>

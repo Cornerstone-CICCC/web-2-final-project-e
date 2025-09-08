@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import Plus from "../../assets/svgs/icon_plus.svg";
+
+const { id, question, answer } = Astro.props;
+---
+
+<li class="faq__item" data-id={id}>
+  <button
+    class="faq__trigger"
+    id={`label-${id}`}
+    type="button"
+    aria-expanded="false"
+    aria-controls={`panel-${id}`}>
+    <span class="text-medium-bold">{question}</span>
+    <Image class="faq__icon" src={Plus} alt="plus icon" />
+  </button>
+
+  <div
+    id={`panel-${id}`}
+    class="faq__panel"
+    role="region"
+    aria-labelledby={`label-${id}`}>
+    <p class="text-medium-normal faq__answer">{answer}</p>
+  </div>
+</li>
+
+<style>
+  .faq__item {
+  }
+
+  .faq__trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 24px;
+    background: var(--color-white);
+    border: 1px solid var(--color-black);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .faq__question {
+    display: block;
+  }
+
+  .faq__icon {
+    transition: transform 200ms ease;
+  }
+
+  .faq__trigger[aria-expanded="true"] .faq__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq__panel {
+    height: 0px;
+    overflow: hidden;
+    transition: height 240ms ease;
+    background: transparent;
+    text-align: left;
+  }
+
+  .faq__answer {
+    margin: 12px 16px 16px 16px;
+  }
+
+  @media (max-width: 768px) {
+  }
+</style>
+
+<script src="./faq.ts"></script>

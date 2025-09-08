@@ -1,0 +1,75 @@
+---
+import FacebookIcon from "../../assets/svgs/icon_facebook.svg";
+import InstagramIcon from "../../assets/svgs/icon_instagram.svg";
+import TwitterIcon from "../../assets/svgs/icon_twitter.svg";
+import LinkedInIcon from "../../assets/svgs/icon_linkedIn.svg";
+import { Image } from "astro:assets";
+
+interface SocialLink {
+  name: string;
+  icon: any;
+  url: string;
+  ariaLabel: string;
+}
+
+const socialLinks: SocialLink[] = [
+  {
+    name: "Facebook",
+    icon: FacebookIcon,
+    url: "https://facebook.com/ddsgnr",
+    ariaLabel: "Follow us on Facebook",
+  },
+  {
+    name: "Instagram",
+    icon: InstagramIcon,
+    url: "https://instagram.com/ddsgnr",
+    ariaLabel: "Follow us on Instagram",
+  },
+  {
+    name: "Twitter",
+    icon: TwitterIcon,
+    url: "https://twitter.com/ddsgnr",
+    ariaLabel: "Follow us on Twitter",
+  },
+  {
+    name: "LinkedIn",
+    icon: LinkedInIcon,
+    url: "https://linkedin.com/company/ddsgnr",
+    ariaLabel: "Connect with us on LinkedIn",
+  },
+];
+---
+
+<div class="social-icons">
+  {
+    socialLinks.map((social) => (
+      <a
+        href={social.url}
+        class="social-icon"
+        aria-label={social.ariaLabel}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-social={social.name.toLowerCase()}>
+        <Image src={social.icon} alt={social.ariaLabel} />
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .social-icons {
+    display: inline-flex;
+    gap: 12px;
+  }
+
+  .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (max-width: 480px) {
+    .social-icons {
+      display: none;
+    }
+  }
+</style>

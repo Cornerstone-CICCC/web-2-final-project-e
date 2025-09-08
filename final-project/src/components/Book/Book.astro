@@ -1,0 +1,87 @@
+---
+import Button from "../Button/Button.astro";
+import iconChevronRight from "../../assets/svgs/icon_chevron_right.svg";
+---
+
+<section class="book">
+  <div class="book__inner">
+    <p class="book__overline text-regular-semibold">
+      Your Automotive Repair & Maintenance Service Specialist
+    </p>
+
+    <h2 class="book__title">
+      SCHEDULE YOUR APPOINTMENT TODAY CALL: 299-485-488
+    </h2>
+
+    <p class="book__desc text-medium-normal">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+      varius enim in eros elementum tristique. Duis cursus, mi quis viverra
+      ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+    </p>
+
+    <div class="book__actions">
+      <Button
+        type="button"
+        variant="line"
+        label="Book Your Appointment Now"
+        isMobileFullWidth={true}
+      />
+
+      <a
+        class="book__link"
+        href="/about"
+        aria-label="Learn more about our services">
+        <span>Learn more</span>
+        <img class="book__icon" src={iconChevronRight.src} alt="" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .book {
+    background: var(--color-kuno-greywhite);
+    padding: 112px 64px;
+  }
+
+  .book__inner {
+    position: relative;
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .book__title {
+    margin-top: 16px;
+    text-transform: uppercase;
+  }
+
+  .book__desc {
+    margin-top: 24px;
+  }
+
+  .book__actions {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .book__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .book__link:hover span {
+    text-decoration: underline;
+  }
+
+  .book__icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+  }
+</style>

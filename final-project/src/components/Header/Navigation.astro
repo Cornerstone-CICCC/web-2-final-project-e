@@ -1,0 +1,51 @@
+---
+import Button from "../Button/Button.astro";
+import { NAV_ITEMS } from "./data";
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+---
+
+<nav class="nav" aria-label="Primary">
+  {
+    NAV_ITEMS.map((item) => {
+      const isActive =
+        currentPath === item.href ||
+        (item.href !== "/" && currentPath.startsWith(item.href));
+      return (
+        <a
+          href={item.href}
+          class={`text-regular-normal nav-link ${isActive ? "active" : ""}`}
+          aria-current={isActive ? "page" : undefined}>
+          {item.label}
+        </a>
+      );
+    })
+  }
+  <Button variant="black" type="button" label="Book Your Appointment Now" />
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .nav-link.active {
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      display: none;
+    }
+  }
+</style>

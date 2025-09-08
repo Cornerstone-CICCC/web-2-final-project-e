@@ -1,0 +1,103 @@
+---
+import { CONTACT_INFO } from "./data";
+import SocialIcons from "./SocialIcons.astro";
+---
+
+<div class="topbar top-bar">
+  <div class="topbar__content top-bar-content container">
+    <div class="topbar__contact contact-info">
+      {
+        CONTACT_INFO.map((item) => {
+          const value =
+            item.type === "email" ? (
+              <a
+                href={`mailto:${item.value}`}
+                class="topbar__value--email email-link">
+                {item.value}
+              </a>
+            ) : item.type === "phone" ? (
+              <a
+                href={`tel:${item.value.replace(/\s/g, "")}`}
+                class="topbar__value--phone text-regular-semibold phone-link">
+                {item.value}
+              </a>
+            ) : (
+              <span class="value">{item.value}</span>
+            );
+
+          return (
+            <div class="topbar__contact-item contact-item text-small-normal">
+              <span
+                class={`topbar__label label ${item.type === "phone" ? "text-regular-semibold" : ""}`}>
+                {item.label}
+              </span>
+              {value}
+            </div>
+          );
+        })
+      }
+    </div>
+    <SocialIcons />
+  </div>
+</div>
+
+<style>
+  .top-bar {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-black);
+  }
+
+  .top-bar-content {
+    display: flex;
+    padding: 12px 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .contact-info {
+    display: flex;
+    align-items: center;
+    padding: 4.5px 0;
+  }
+
+  .contact-item {
+    display: flex;
+    padding: 0 16px;
+    line-height: 1.5;
+    color: var(--color-black);
+  }
+
+  .contact-item:first-child {
+    padding-left: 0;
+  }
+
+  .contact-item:last-child {
+    padding-right: 0;
+  }
+
+  .contact-item + .contact-item {
+    border-left: 1px solid var(--color-kuno-grey);
+  }
+
+  .label.phone-label {
+    font-weight: 700;
+  }
+
+  .phone-link {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 992px) {
+    .contact-item {
+      padding: 0 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .top-bar {
+      display: none;
+    }
+  }
+</style>

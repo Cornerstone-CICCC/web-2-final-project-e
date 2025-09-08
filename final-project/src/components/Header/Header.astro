@@ -1,0 +1,71 @@
+---
+import TopBar from "./TopBar.astro";
+import Navigation from "./Navigation.astro";
+import MobileMenu from "./MobileMenu.astro";
+import Logo from "../../assets/images/logo@x2.png";
+import { Image } from "astro:assets";
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+---
+
+<header class="header" role="banner">
+  <TopBar />
+  <div class="container main-header">
+    <a href="/" class="logo" aria-label="Homepage">
+      <Image
+        src={Logo}
+        alt="logo"
+        width={131}
+        height={40}
+        format="png"
+        fetchpriority="high"
+      />
+    </a>
+    <Navigation currentPath={currentPath} />
+    <MobileMenu currentPath={currentPath} />
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: var(--color-white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--color-black);
+  }
+
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo img {
+    width: 131px;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .main-header {
+      padding: 12px 24px;
+    }
+
+    .logo {
+      padding: 4px 0;
+    }
+  }
+</style>
+
+<script src="./mobile-menu.ts"></script>

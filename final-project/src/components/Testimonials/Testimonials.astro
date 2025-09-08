@@ -1,0 +1,157 @@
+---
+import Card from "./Card.astro";
+import { testimonials } from "./data";
+
+import ArrowRight from "../../assets/svgs/arrow_right.svg";
+import ArrowLeft from "../../assets/svgs/arrow_left.svg";
+import { Image } from "astro:assets";
+
+const id = "testimonial-carousel";
+const items = testimonials;
+---
+
+<section class="testimonials" aria-label="Customer testimonials">
+  <div class="container testimonials__inner">
+    <header>
+      <h2>Customer testimonials</h2>
+      <p class="text-medium-normal">Check reviews from our clients</p>
+    </header>
+
+    <div id={id} class="testimonials__carousel" data-count={items.length}>
+      <div class="testimonials__viewport">
+        <button
+          class="testimonials__nav testimonials__nav--prev"
+          aria-label="Previous testimonial">
+          <Image src={ArrowLeft} alt="" aria-hidden="true" />
+        </button>
+        <div class="testimonials__mask">
+          <div class="testimonials__carousel-track" role="list">
+            {items.map((item) => <Card item={item} />)}
+          </div>
+        </div>
+        <button
+          class="testimonials__nav testimonials__nav--next"
+          aria-label="Next testimonial">
+          <Image src={ArrowRight} alt="" aria-hidden="true" />
+        </button>
+      </div>
+
+      <div
+        class="testimonials__dots"
+        role="tablist"
+        aria-label="Testimonials pagination">
+        {
+          items.map((_, i) => (
+            <button
+              class={`testimonials__dot${i === 0 ? " testimonials__dot--active" : ""}`}
+              data-index={i}
+              aria-label={`Go to testimonial ${i + 1}`}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .testimonials {
+      padding: 56px 20px;
+      background: var(--color-kuno-greywhite);
+    }
+
+    .testimonials__container.testimonials__inner {
+    }
+
+    .testimonials header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .testimonials__carousel {
+      position: relative;
+      margin-top: 80px;
+    }
+
+    .testimonials__viewport {
+      position: relative;
+    }
+
+    .testimonials__mask {
+      overflow: hidden;
+    }
+
+    .testimonials__carousel-track {
+      display: flex;
+      gap: 32px;
+      transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+      will-change: transform;
+    }
+
+    .testimonials__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid var(--color-black);
+      background: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .testimonials__nav--prev {
+      left: -27px;
+    }
+
+    .testimonials__nav--next {
+      right: -27px;
+    }
+
+    .testimonials__dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 64px;
+    }
+
+    .testimonials :global(.testimonials__dot) {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--color-neutral-gray);
+      border: none;
+      cursor: pointer;
+    }
+
+    .testimonials :global(.testimonials__dot--active) {
+      background: var(--color-black);
+    }
+
+    @media (max-width: 768px) {
+      .testimonials {
+        padding: 56px 20px;
+        background: var(--color-white);
+      }
+
+      .testimonials header {
+        align-items: flex-start;
+      }
+
+      .testimonials__carousel {
+        margin-top: 48px;
+      }
+
+      :global(.card) {
+        flex: 100% 0 0 !important;
+      }
+    }
+  </style>
+</section>
+
+<script src="./testimonials.ts"></script>

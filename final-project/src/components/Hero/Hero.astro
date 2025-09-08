@@ -1,0 +1,113 @@
+---
+import Button from "../Button/Button.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaType?: "button" | "submit" | "reset";
+  ctaVariant?: "black" | "white" | "line";
+  ctaId?: string;
+}
+
+const {
+  title = "Expert Car Care You Can Trust",
+  description = "Get Back on the Road Quickly with Ddsgnr, Expert Car Care You Can Trust, Expert Car Care You Can Trust Expert Car Care You Can Trust Expert Car Care You Can Trust Expert Car Care You Can Trust",
+  ctaLabel = "Book Your Appointment Now",
+  ctaType = "button",
+  ctaVariant = "white",
+  ctaId,
+} = Astro.props as Props;
+
+const titleId = "hero-title";
+const descId = "hero-description";
+---
+
+<header class="hero" aria-labelledby={titleId} aria-describedby={descId}>
+  <div class="hero__container container">
+    <h1 id={titleId} class="hero__title">{title}</h1>
+
+    <p id={descId} class="hero__description text-medium-normal">
+      {description}
+    </p>
+
+    <Button label={ctaLabel} type={ctaType} variant={ctaVariant} id={ctaId} />
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    height: 900px;
+
+    overflow: hidden;
+    z-index: 0;
+    isolation: isolate;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    transition: background 0.5s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/hero_car.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    z-index: 0;
+  }
+
+  .hero:hover::after {
+    transform: scale(1.1);
+  }
+
+  .hero:hover::before {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .hero__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    width: 100%;
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__title,
+  .hero__description {
+    max-width: 560px;
+    color: var(--color-white);
+  }
+
+  @media screen and (max-width: 768px) {
+    .hero {
+      height: 575px;
+    }
+
+    .hero__title,
+    .hero__description {
+      max-width: 362px;
+    }
+
+    .hero__title {
+      font-size: var(--font-size-h3);
+    }
+  }
+</style>

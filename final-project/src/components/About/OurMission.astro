@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import CarInside from "../../assets/images/about_car_inside.jpg";
+---
+
+<section class="about background">
+  <div class="container about__container">
+    <figure class="about__image-container">
+      <Image class="about__image" src={CarInside} alt="Car interior view" />
+    </figure>
+
+    <div class="about__content">
+      <h2>Our Mission</h2>
+      <p class="text-medium-normal">
+        At Ddsgnr Auto Repair, our mission is to provide our customers with the
+        highest level of car care and customer service. We believe that everyone
+        deserves to drive a safe, reliable vehicle, and it is our goal to help
+        make that a reality. With years of experience, state-of-the-art
+        equipment, and a team of highly trained technicians, we are dedicated to
+        restoring your car to its best condition. Whether you need routine
+        maintenance or complex repairs, we are committed to getting you back on
+        the road as quickly and efficiently as possible. Trust us to take care
+        of your car – and you – every step of the way.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .background {
+    background-color: var(--color-kuno-greywhite);
+  }
+
+  .about__container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .about__image-container {
+    flex: 0 1 50%;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .about__image {
+    width: 100%;
+    height: 640px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about__content {
+    flex: 0 1 50%;
+    min-width: 0;
+  }
+
+  .about__content p {
+    margin-top: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .about__container {
+      flex-direction: column;
+      gap: 48px;
+      padding: 48px 24px;
+    }
+
+    .about__image-container,
+    .about__content {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .about__image {
+      height: auto;
+    }
+  }
+</style>

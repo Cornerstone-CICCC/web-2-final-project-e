@@ -1,0 +1,83 @@
+---
+import { CONTACT_ITEMS } from "./data";
+import Icon from "./Icon.astro";
+---
+
+<div class="container contact-info">
+  <div class="contact-info__header">
+    <h2>Contact us</h2>
+    <p class="text-medium-normal">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </p>
+  </div>
+  <div class="contact-info__grid">
+    {
+      CONTACT_ITEMS.map((item) => (
+        <div class="contact-info__item">
+          <Icon name={item.icon} />
+          <h4 class="contact-info__item-title">{item.title}</h4>
+          <p class="text-regular-normal contact-info__item-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            varius enim in eros.
+          </p>
+          <a href={item.link} class="text-regular-link contact-info__item-link">
+            {item.text}
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .contact-info__header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .contact-info__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .contact-info__item-title {
+    margin-top: 24px;
+  }
+
+  .contact-info__item-description {
+    margin-top: 16px;
+  }
+
+  .contact-info__item-link {
+    display: inline-block;
+    margin-top: 24px;
+  }
+
+  .contact-info__item-link:hover {
+  }
+
+  @media (max-width: 768px) {
+    .contact-info {
+      padding: 48px 24px;
+      gap: 48px;
+    }
+
+    .contact-info__header {
+      align-items: flex-start;
+    }
+
+    .contact-info__grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>
