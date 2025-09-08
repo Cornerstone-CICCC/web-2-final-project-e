@@ -8,6 +8,7 @@ import ContactUs from "../components/Contact/ContactUs.astro";
 import Testimonials from "../components/Testimonials/Testimonials.astro";
 import FAQ from "../components/FAQ/FAQ.astro";
 import Team from "../components/Team/Team.astro";
+import Book from "../components/Book/Book.astro";
 ---
 
 <BaseLayout
@@ -36,11 +37,14 @@ import Team from "../components/Team/Team.astro";
   <AboutSection />
   <ServicesSection />
   <ContactUs />
-  <div class="team">
+  <div class="mobile-hidden">
     <Team />
   </div>
   <Testimonials />
   <FAQ />
+  <div class="mobile-hidden">
+    <Book />
+  </div>
 </BaseLayout>
 
 <style>
@@ -105,7 +109,7 @@ import Team from "../components/Team/Team.astro";
       font-size: var(--font-size-h3);
     }
 
-    .team {
+    .mobile-hidden {
       display: none;
     }
   }
