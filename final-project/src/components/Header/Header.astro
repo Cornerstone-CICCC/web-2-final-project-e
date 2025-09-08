@@ -12,23 +12,31 @@ interface Props {
 const { currentPath = "/" } = Astro.props;
 ---
 
-<header class="header">
+<header class="header" role="banner">
   <TopBar />
-  <div class="main-header container">
-    <a href="/" class="logo">
-      <Image src={Logo} alt="logo" />
+  <div class="container main-header">
+    <a href="/" class="logo" aria-label="Homepage">
+      <Image
+        src={Logo}
+        alt="logo"
+        width={131}
+        height={40}
+        format="png"
+        fetchpriority="high"
+      />
     </a>
     <Navigation currentPath={currentPath} />
-    <MobileMenu />
+    <MobileMenu currentPath={currentPath} />
   </div>
 </header>
 
 <style>
   .header {
-    background-color: white;
+    background-color: var(--color-white);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--color-black);
   }
 
   .main-header {
@@ -38,6 +46,12 @@ const { currentPath = "/" } = Astro.props;
     padding: 16px 64px;
   }
 
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .logo img {
     width: 131px;
     height: auto;
@@ -45,15 +59,13 @@ const { currentPath = "/" } = Astro.props;
 
   @media (max-width: 768px) {
     .main-header {
-      padding: 16px 24px;
+      padding: 12px 24px;
+    }
+
+    .logo {
+      padding: 4px 0;
     }
   }
 </style>
 
-<script>
-  import { setupMobileMenu } from "./mobile-menu.ts";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    setupMobileMenu();
-  });
-</script>
+<script src="./mobile-menu.ts"></script>

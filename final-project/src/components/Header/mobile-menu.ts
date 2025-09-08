@@ -1,21 +1,28 @@
+let isSetup = false;
 export function setupMobileMenu(): void {
+  if (isSetup) return;
   const toggleButton = document.getElementById(
     "mobileMenuToggle",
-  ) as HTMLButtonElement;
-  const mobileMenu = document.getElementById("mobileMenu") as HTMLDivElement;
+  ) as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById(
+    "mobileMenu",
+  ) as HTMLDivElement | null;
 
   if (!toggleButton || !mobileMenu) return;
+
+  isSetup = true;
 
   toggleButton.addEventListener("click", (e) => {
     e.stopPropagation();
     toggleMobileMenu();
   });
 
-  const navLinks = mobileMenu.querySelectorAll(".mobile-nav-link");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+  mobileMenu.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const link = target.closest(".mobile-nav-link") as HTMLAnchorElement | null;
+    if (link) {
       closeMobileMenu();
-    });
+    }
   });
 
   document.addEventListener("click", (e) => {
@@ -35,6 +42,22 @@ export function setupMobileMenu(): void {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && mobileMenu.classList.contains("active")) {
       closeMobileMenu();
+    }
+
+    if (e.key === "Tab" && mobileMenu.classList.contains("active")) {
+      const focusable = mobileMenu.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 
@@ -65,8 +88,10 @@ function toggleMobileMenu(): void {
 function openMobileMenu(): void {
   const toggleButton = document.getElementById(
     "mobileMenuToggle",
-  ) as HTMLButtonElement;
-  const mobileMenu = document.getElementById("mobileMenu") as HTMLDivElement;
+  ) as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById(
+    "mobileMenu",
+  ) as HTMLDivElement | null;
 
   if (!toggleButton || !mobileMenu) return;
 
@@ -75,13 +100,20 @@ function openMobileMenu(): void {
   toggleButton.setAttribute("aria-expanded", "true");
 
   document.body.style.overflow = "hidden";
+
+  const firstLink = mobileMenu.querySelector<HTMLElement>(
+    ".mobile-nav-link, a, button",
+  );
+  firstLink?.focus();
 }
 
 function closeMobileMenu(): void {
   const toggleButton = document.getElementById(
     "mobileMenuToggle",
-  ) as HTMLButtonElement;
-  const mobileMenu = document.getElementById("mobileMenu") as HTMLDivElement;
+  ) as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById(
+    "mobileMenu",
+  ) as HTMLDivElement | null;
 
   if (!toggleButton || !mobileMenu) return;
 
@@ -90,4 +122,8 @@ function closeMobileMenu(): void {
   toggleButton.setAttribute("aria-expanded", "false");
 
   document.body.style.overflow = "";
+
+  toggleButton.focus();
 }
+
+setupMobileMenu();

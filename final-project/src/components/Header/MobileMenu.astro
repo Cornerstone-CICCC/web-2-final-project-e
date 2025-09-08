@@ -1,32 +1,51 @@
 ---
-const navigationItems = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+import Button from "../Button/Button.astro";
+import { NAV_ITEMS } from "./data";
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
 ---
 
 <div class="mobile-menu">
   <button
     class="mobile-menu__toggle"
     id="mobileMenuToggle"
-    aria-label="Toggle navigation menu">
+    aria-label="Toggle navigation menu"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    aria-controls="mobileMenu">
     <span class="mobile-menu__line"></span>
     <span class="mobile-menu__line"></span>
     <span class="mobile-menu__line"></span>
   </button>
 
-  <div class="mobile-menu__overlay" id="mobileMenu">
-    <nav class="mobile-menu__nav">
+  <div
+    class="mobile-menu__overlay"
+    id="mobileMenu"
+    role="dialog"
+    aria-modal="true">
+    <nav class="mobile-menu__nav" role="menu" aria-label="Mobile Primary">
       {
-        navigationItems.map((item) => (
-          <a href={item.href} class="mobile-menu__link">
-            {item.label}
-          </a>
-        ))
+        NAV_ITEMS.map((item) => {
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== "/" && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              class={`text-medium-normal mobile-menu__link ${
+                isActive ? "active" : ""
+              }`}
+              role="menuitem"
+              aria-current={isActive ? "page" : undefined}>
+              {item.label}
+            </a>
+          );
+        })
       }
-      <a href="/book" class="mobile-menu__cta">Book Your Appointment Now</a>
+      <Button variant="black" type="button" label="Book Your Appointment Now" />
     </nav>
   </div>
 </div>
@@ -44,13 +63,17 @@ const navigationItems = [
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 3px;
+    width: 24px;
+    height: 24px;
+    padding: 6px 3px;
     z-index: 1001;
   }
 
   .mobile-menu__line {
-    width: 24px;
-    height: 3px;
+    width: 18px;
+    height: 2px;
     background-color: var(--color-black);
     border-radius: 2px;
   }
@@ -82,33 +105,18 @@ const navigationItems = [
     text-align: center;
   }
 
-  .mobile-menu__link {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-neutral-dark-gray);
-    transition: color 0.3s ease;
-  }
-
-  .mobile-menu__cta {
-    margin-top: 30px;
-    background-color: var(--color-black);
-    color: var(--color-white);
-    padding: 15px 24px;
-    border-radius: 6px;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-    text-align: center;
-    transition: all 0.3s ease;
+  .mobile-menu__link.active {
+    text-decoration: underline;
   }
 
   .mobile-menu__toggle.active .mobile-menu__line:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(3.5px, 3.5px);
   }
   .mobile-menu__toggle.active .mobile-menu__line:nth-child(2) {
     opacity: 0;
   }
   .mobile-menu__toggle.active .mobile-menu__line:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: rotate(-45deg) translate(3.5px, -3.5px);
   }
 
   @media (max-width: 768px) {

@@ -1,29 +1,30 @@
 ---
+import Button from "../Button/Button.astro";
+import { NAV_ITEMS } from "./data";
 interface Props {
   currentPath?: string;
 }
 
 const { currentPath = "/" } = Astro.props;
-
-const navigationItems = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
 ---
 
-<nav class="nav">
+<nav class="nav" aria-label="Primary">
   {
-    navigationItems.map((item) => (
-      <a href={item.href} class={`nav-link text-regular-normal`}>
-        {item.label}
-      </a>
-    ))
+    NAV_ITEMS.map((item) => {
+      const isActive =
+        currentPath === item.href ||
+        (item.href !== "/" && currentPath.startsWith(item.href));
+      return (
+        <a
+          href={item.href}
+          class={`text-regular-normal nav-link ${isActive ? "active" : ""}`}
+          aria-current={isActive ? "page" : undefined}>
+          {item.label}
+        </a>
+      );
+    })
   }
-  <a href="/book" class="cta-button text-regular-normal"
-    >Book Your Appointment Now</a
-  >
+  <Button variant="black" type="button" label="Book Your Appointment Now" />
 </nav>
 
 <style>
@@ -33,11 +34,13 @@ const navigationItems = [
     align-items: center;
   }
 
-  .cta-button {
-    background-color: var(--color-black);
-    color: var(--color-white);
-    padding: 8px 20px;
-    border-radius: 5px;
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .nav-link.active {
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
   }
 
   @media (max-width: 768px) {

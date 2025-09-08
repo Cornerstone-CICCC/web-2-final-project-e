@@ -1,55 +1,24 @@
 ---
+import { CONTACT_INFO } from "./data";
 import SocialIcons from "./SocialIcons.astro";
-
-interface ContactInfo {
-  id: string;
-  label: string;
-  value: string;
-  type: "phone" | "location" | "hours" | "email";
-}
-
-const contactInfo: ContactInfo[] = [
-  {
-    id: "emergency",
-    label: "For emergency cases:",
-    value: "800 123 45 67",
-    type: "phone",
-  },
-  {
-    id: "location",
-    label: "Location:",
-    value: "121 Wallstreet Street, NY, USA",
-    type: "location",
-  },
-  {
-    id: "hours",
-    label: "Open hours:",
-    value: "9:00-24:00 Mon-Sat",
-    type: "hours",
-  },
-  {
-    id: "email",
-    label: "Email:",
-    value: "info@Ddsgnr.com",
-    type: "email",
-  },
-];
 ---
 
-<div class="top-bar">
-  <div class="top-bar-content container">
-    <div class="contact-info">
+<div class="topbar top-bar">
+  <div class="topbar__content top-bar-content container">
+    <div class="topbar__contact contact-info">
       {
-        contactInfo.map((item) => {
+        CONTACT_INFO.map((item) => {
           const value =
             item.type === "email" ? (
-              <a href={`mailto:${item.value}`} class="value email-link">
+              <a
+                href={`mailto:${item.value}`}
+                class="topbar__value--email email-link">
                 {item.value}
               </a>
             ) : item.type === "phone" ? (
               <a
                 href={`tel:${item.value.replace(/\s/g, "")}`}
-                class="value phone-link">
+                class="topbar__value--phone text-regular-semibold phone-link">
                 {item.value}
               </a>
             ) : (
@@ -57,9 +26,9 @@ const contactInfo: ContactInfo[] = [
             );
 
           return (
-            <div class="contact-item text-small-normal" key={item.id}>
+            <div class="topbar__contact-item contact-item text-small-normal">
               <span
-                class={`label ${item.type === "phone" ? "phone-label" : ""}`}>
+                class={`topbar__label label ${item.type === "phone" ? "text-regular-semibold" : ""}`}>
                 {item.label}
               </span>
               {value}
@@ -89,6 +58,7 @@ const contactInfo: ContactInfo[] = [
   .contact-info {
     display: flex;
     align-items: center;
+    padding: 4.5px 0;
   }
 
   .contact-item {
