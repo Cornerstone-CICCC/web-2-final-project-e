@@ -115,6 +115,23 @@ function setupEmailInput(el: HTMLInputElement) {
   });
 }
 
+function setupDateInput(el: HTMLInputElement) {
+  const today = new Date().toISOString().split("T")[0];
+  el.setAttribute("min", today);
+
+  attachValidator(el, {
+    onBlur: (inputEl) => {
+      const selected = inputEl.value;
+      if (selected && selected < today) {
+        inputEl.setCustomValidity("Please select a date today or later.");
+        inputEl.reportValidity();
+      } else {
+        inputEl.setCustomValidity("");
+      }
+    },
+  });
+}
+
 const emailForm = new EmailForm("contact-form", "form-status");
 emailForm.init();
 
@@ -126,4 +143,9 @@ if (phoneInput instanceof HTMLInputElement) {
 const emailInput = document.getElementById("email");
 if (emailInput instanceof HTMLInputElement) {
   setupEmailInput(emailInput);
+}
+
+const dateInput = document.getElementById("date");
+if (dateInput instanceof HTMLInputElement) {
+  setupDateInput(dateInput);
 }

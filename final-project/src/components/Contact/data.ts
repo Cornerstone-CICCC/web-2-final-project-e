@@ -39,7 +39,7 @@ export const FORM_FIELDS = [
     required: true,
   },
   {
-    id: "appointment-date",
+    id: "date",
     label: "Appointment date",
     type: "date",
     name: "appointment_date",
