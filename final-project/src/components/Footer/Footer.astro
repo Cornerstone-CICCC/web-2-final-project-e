@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="container">
+  <div class="container narrow">
     <div class="top">
       <a class="brand" href="/" aria-label="Ddsgnr Home">
         <Image src={logoUrl} alt="Ddsgnr" width={112} height={28} />
@@ -58,18 +58,15 @@ const year = new Date().getFullYear();
 
 <style>
   .footer {
-    background: #ffffff;
+    background: var(--color-white);
     color: var(--color-black);
-  }
-  .container {
-    padding: 80px 64px;
   }
 
   .top {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 16px;
+    gap: 32px;
   }
 
   .brand img {
@@ -115,5 +112,23 @@ const year = new Date().getFullYear();
   .legal {
     display: flex;
     gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .top {
+      grid-template-columns: 1fr;
+      justify-items: flex-start;
+      text-align: center;
+    }
+
+    .divider {
+      margin: 24px 0 32px;
+    }
+
+    .bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
   }
 </style>
