@@ -1,27 +1,7 @@
 ---
 import Button from "../Button/Button.astro";
 import { Image } from "astro:assets";
-import KIA from "../../assets/svgs/services_brand_1.svg";
-import BMW from "../../assets/svgs/services_brand_2.svg";
-import BENZ from "../../assets/svgs/services_brand_3.svg";
-import HUNDAI from "../../assets/svgs/services_brand_4.svg";
-import HONDA from "../../assets/svgs/services_brand_5.svg";
-import ACURA from "../../assets/svgs/services_brand_6.svg";
-import FORD from "../../assets/svgs/services_brand_7.svg";
-
-const BRAND_LIST = [
-  { id: 1, name: "KIA", logo: KIA },
-  { id: 2, name: "BMW", logo: BMW },
-  { id: 3, name: "BENZ", logo: BENZ },
-  { id: 4, name: "HUNDAI", logo: HUNDAI },
-  { id: 5, name: "HONDA", logo: HONDA },
-  { id: 6, name: "ACURA", logo: ACURA },
-  { id: 7, name: "FORD", logo: FORD },
-  { id: 8, name: "HUNDAI", logo: HUNDAI },
-  { id: 9, name: "KIA", logo: KIA },
-  { id: 10, name: "BENZ", logo: BENZ },
-  { id: 11, name: "FORD", logo: FORD },
-];
+import { BRAND_LIST } from "./data.ts";
 ---
 
 <section class="brands">
@@ -41,6 +21,7 @@ const BRAND_LIST = [
 
     <div class="brand__button">
       <Button
+        type="button"
         id="view-more-btn"
         variant="line"
         label="View more"
@@ -84,10 +65,6 @@ const BRAND_LIST = [
   }
 
   @media (max-width: 768px) {
-    .brands {
-      padding: 40px 0;
-    }
-
     .brands__list {
       flex-direction: column;
       gap: 32px;
@@ -100,40 +77,4 @@ const BRAND_LIST = [
   }
 </style>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const list = document.getElementById("brands-list");
-    const button = document.getElementById("view-more-btn");
-    if (!list || !button) return;
-
-    const items = Array.from(list.children);
-    let visibleCount = 4;
-
-    const updateVisibility = () => {
-      items.forEach((item, index) => {
-        item.style.display = index < visibleCount ? "flex" : "none";
-      });
-      if (visibleCount >= items.length) {
-        button.style.display = "none";
-      }
-    };
-
-    updateVisibility();
-
-    button.addEventListener("click", () => {
-      visibleCount += 4;
-      updateVisibility();
-    });
-
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        items.forEach((item) => (item.style.display = "flex"));
-        button.style.display = "none";
-      } else {
-        updateVisibility();
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-  });
-</script>
+<script src="./brands.ts"></script>
