@@ -1,5 +1,15 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../global.css";
+
 import ServicesSection from "../components/Services/ServicesSection.astro";
+import Testimonials from "../components/Testimonials/Testimonials.astro";
 ---
 
-<ServicesSection />
+<BaseLayout
+  title="Ddsgnr - Our Services"
+  description="Explore the range of professional design services offered by Ddsgnr, including web design, branding, and digital solutions."
+  currentPath="/services">
+  <ServicesSection />
+  <Testimonials />
+</BaseLayout>
