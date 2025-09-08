@@ -21,7 +21,10 @@ const {
 ---
 
 <div class="contact-form__group">
-  <label for={id} class="text-regular-normal contact-form__label">{label}</label
+  <label
+    for={id}
+    class=`text-regular-normal contact-form__label ${as === "textarea" ? 'contact-form__label_textarea': '' }`
+    >{label}</label
   >
 
   {
@@ -42,7 +45,7 @@ const {
         <option value="" disabled selected>
           Select an option
         </option>
-        {options.map(({ value, label }) => (
+        {options.map(({ value, label }: { value: string; label: string }) => (
           <option value={value}>{label}</option>
         ))}
       </select>
@@ -64,6 +67,10 @@ const {
     margin-bottom: 8px;
   }
 
+  .contact-form__label_textarea {
+    margin-top: 24px;
+  }
+
   .contact-form__input,
   .contact-form__textarea,
   .contact-form__select {
@@ -83,5 +90,6 @@ const {
   .contact-form__input:focus,
   .contact-form__textarea:focus,
   .contact-form__select:focus {
+    outline: 1px solid var(--color-black);
   }
 </style>

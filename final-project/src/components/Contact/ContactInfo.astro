@@ -1,27 +1,6 @@
 ---
+import { CONTACT_ITEMS } from "./data";
 import Icon from "./Icon.astro";
-
-const contactItems = [
-  {
-    icon: "email",
-    title: "Email",
-    link: "mailto:hello@dsgnr.io",
-    text: "hello@dsgnr.io",
-  },
-  { icon: "chat", title: "Live chat", link: "#", text: "Start new chat" },
-  {
-    icon: "phone",
-    title: "Phone",
-    link: "tel:+15550000000",
-    text: "+1 (555) 000-0000",
-  },
-  {
-    icon: "office",
-    title: "Office",
-    link: "#",
-    text: "123 Sample St, Sydney NSW 2000 AU",
-  },
-];
 ---
 
 <div class="container contact-info">
@@ -33,7 +12,7 @@ const contactItems = [
   </div>
   <div class="contact-info__grid">
     {
-      contactItems.map((item) => (
+      CONTACT_ITEMS.map((item) => (
         <div class="contact-info__item">
           <Icon name={item.icon} />
           <h4 class="contact-info__item-title">{item.title}</h4>
