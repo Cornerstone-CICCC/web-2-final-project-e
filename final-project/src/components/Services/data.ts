@@ -19,3 +19,19 @@ export const BRAND_LIST = [
   { id: 10, name: "BENZ", logo: BENZ },
   { id: 11, name: "FORD", logo: FORD },
 ];
+
+import Service1 from "../../assets/images/services_1.jpg";
+import Service2 from "../../assets/images/services_2.jpg";
+import Service3 from "../../assets/images/services_3.jpg";
+import Service4 from "../../assets/images/services_4.jpg";
+import Service5 from "../../assets/images/services_5.jpg";
+import Service6 from "../../assets/images/services_6.jpg";
+
+export const SERVICES_LIST = [
+  { title: "Engine services", image: Service1 },
+  { title: "Transmission services", image: Service2 },
+  { title: "Brake services", image: Service3 },
+  { title: "Suspension services", image: Service4 },
+  { title: "Electrical services", image: Service5 },
+  { title: "Exhaust services", image: Service6 },
+];
