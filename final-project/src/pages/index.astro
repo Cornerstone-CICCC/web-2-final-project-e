@@ -7,6 +7,7 @@ import ServicesSection from "../components/Services/ServicesSection.astro";
 import ContactUs from "../components/Contact/ContactUs.astro";
 import Testimonials from "../components/Testimonials/Testimonials.astro";
 import FAQ from "../components/FAQ/FAQ.astro";
+import Team from "../components/Team/Team.astro";
 ---
 
 <BaseLayout
@@ -35,6 +36,9 @@ import FAQ from "../components/FAQ/FAQ.astro";
   <AboutSection />
   <ServicesSection />
   <ContactUs />
+  <div class="team">
+    <Team />
+  </div>
   <Testimonials />
   <FAQ />
 </BaseLayout>
@@ -99,6 +103,10 @@ import FAQ from "../components/FAQ/FAQ.astro";
 
     .hero__title {
       font-size: var(--font-size-h3);
+    }
+
+    .team {
+      display: none;
     }
   }
 </style>
