@@ -1,5 +1,13 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../global.css";
+
 import AboutSection from "../components/About/AboutSection.astro";
 ---
 
-<AboutSection />
+<BaseLayout
+  title="Ddsgnr - About Us"
+  description="Learn more about Ddsgnr, a creative design agency specializing in web design, branding, and digital solutions."
+  currentPath="/about">
+  <AboutSection />
+</BaseLayout>
