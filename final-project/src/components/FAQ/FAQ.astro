@@ -6,7 +6,7 @@ import FaqItem from "./FAQItem.astro";
 ---
 
 <section class="faq">
-  <div class="container faq__inner">
+  <div class="faq__inner">
     <div class="faq__header">
       <h2>FAQs</h2>
       <p class="text-medium-normal">
@@ -40,6 +40,8 @@ import FaqItem from "./FAQItem.astro";
 
 <style>
   .faq {
+    position: relative;
+    padding: 112px 64px;
   }
 
   .faq__inner {
@@ -49,6 +51,7 @@ import FaqItem from "./FAQItem.astro";
     align-items: center;
     gap: 80px;
     max-width: 768px;
+    margin: 0 auto;
     text-align: center;
   }
 
@@ -71,7 +74,15 @@ import FaqItem from "./FAQItem.astro";
     margin: 16px 0 24px;
   }
 
+  .faq__cta {
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
+    .faq {
+      padding: 48px 24px;
+    }
+
     .faq__inner {
       gap: 48px;
     }
