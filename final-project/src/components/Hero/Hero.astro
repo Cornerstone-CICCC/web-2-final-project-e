@@ -1,23 +1,37 @@
 ---
+import Button from "../Button/Button.astro";
 
+interface Props {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaType?: "button" | "submit" | "reset";
+  ctaVariant?: "black" | "white" | "line";
+  ctaId?: string;
+}
+
+const {
+  title = "Expert Car Care You Can Trust",
+  description = "Get Back on the Road Quickly with Ddsgnr, Expert Car Care You Can Trust, Expert Car Care You Can Trust Expert Car Care You Can Trust Expert Car Care You Can Trust Expert Car Care You Can Trust",
+  ctaLabel = "Book Your Appointment Now",
+  ctaType = "button",
+  ctaVariant = "white",
+  ctaId,
+} = Astro.props as Props;
+
+const titleId = "hero-title";
+const descId = "hero-description";
 ---
 
-<header class="hero">
+<header class="hero" aria-labelledby={titleId} aria-describedby={descId}>
   <div class="hero__container container">
-    <h1 class="hero__title">Expert Car Care You Can Trust</h1>
+    <h1 id={titleId} class="hero__title">{title}</h1>
 
-    <p class="hero__description text-medium-normal">
-      Get Back on the Road Quickly with Ddsgnr, Expert Car Care You Can Trust,
-      Expert Car Care You Can Trust Expert Car Care You Can Trust Expert Car
-      Care You Can Trust Expert Car Care You Can Trust
+    <p id={descId} class="hero__description text-medium-normal">
+      {description}
     </p>
 
-    <button
-      class="hero__button text-regular-normal"
-      type="button"
-      aria-label="Book your appointment now">
-      Book Your Appointment Now
-    </button>
+    <Button label={ctaLabel} type={ctaType} variant={ctaVariant} id={ctaId} />
   </div>
 </header>
 
@@ -26,10 +40,10 @@
     position: relative;
     display: flex;
     height: 900px;
-    background-image: url("../../assets/images/hero_car.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+
+    overflow: hidden;
+    z-index: 0;
+    isolation: isolate;
   }
 
   .hero::before {
@@ -38,6 +52,30 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     height: 100%;
+    transition: background 0.5s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../../assets/images/hero_car.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    z-index: 0;
+  }
+
+  .hero:hover::after {
+    transform: scale(1.1);
+  }
+
+  .hero:hover::before {
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .hero__container {
@@ -48,25 +86,14 @@
     text-align: left;
     width: 100%;
     gap: 24px;
+    position: relative;
+    z-index: 2;
   }
 
   .hero__title,
   .hero__description {
     max-width: 560px;
     color: var(--color-white);
-  }
-
-  .hero__button {
-    margin-top: 16px;
-    background-color: var(--color-white);
-    padding: 12px 24px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .hero__button:hover {
-    background-color: var(--color-gray-100);
   }
 
   @media screen and (max-width: 768px) {
