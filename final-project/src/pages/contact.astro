@@ -1,5 +1,13 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../global.css";
+
 import ContactUs from "../components/Contact/ContactUs.astro";
 ---
 
-<ContactUs />
+<BaseLayout
+  title="Ddsgnr - Contact Us"
+  description="Get in touch with Ddsgnr, a creative design agency specializing in web design, branding, and digital solutions."
+  currentPath="/contact">
+  <ContactUs />
+</BaseLayout>
