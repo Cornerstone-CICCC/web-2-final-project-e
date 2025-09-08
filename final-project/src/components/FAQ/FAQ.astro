@@ -1,0 +1,68 @@
+---
+import Button from "../Button/Button.astro";
+import type { FAQ } from "./data";
+import { faqs } from "./data";
+import FaqItem from "./FAQItem.astro";
+---
+
+<section class="faq">
+  <div class="container faq__inner">
+    <div class="faq__header">
+      <h2>FAQs</h2>
+      <p class="text-medium-normal faq__sub">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+        varius enim in eros elementum tristique.
+      </p>
+    </div>
+
+    <ul class="faq__list" role="list">
+      {
+        faqs.map((f: FAQ) => (
+          <FaqItem id={f.id} question={f.question} answer={f.answer} />
+        ))
+      }
+    </ul>
+
+    <div class="faq__cta">
+      <h4>Still have a question?</h4>
+      <p class="text-medium-normal faq__sub">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+      <Button variant="line" type="button" label="Contact" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+  }
+
+  .faq__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    max-width: 768px;
+    text-align: center;
+  }
+
+  .faq__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .faq__sub {
+    margin: 16px 0 24px;
+  }
+</style>
