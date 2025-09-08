@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../global.css";
 
+import Hero from "../components/Hero/Hero.astro";
 import AboutSection from "../components/About/AboutSection.astro";
 import ServicesSection from "../components/Services/ServicesSection.astro";
 import ContactUs from "../components/Contact/ContactUs.astro";
@@ -15,25 +16,7 @@ import Book from "../components/Book/Book.astro";
   title="Ddsgnr - Creative Design Agency"
   description="Professional design agency specializing in web design, branding, and digital solutions"
   currentPath="/">
-  <header class="hero">
-    <div class="hero__container container">
-      <h1 class="hero__title">Expert Car Care You Can Trust</h1>
-
-      <p class="hero__description text-medium-normal">
-        Get Back on the Road Quickly with Ddsgnr, Expert Car Care You Can Trust,
-        Expert Car Care You Can Trust Expert Car Care You Can Trust Expert Car
-        Care You Can Trust Expert Car Care You Can Trust
-      </p>
-
-      <button
-        class="hero__button text-regular-normal"
-        type="button"
-        aria-label="Book your appointment now">
-        Book Your Appointment Now
-      </button>
-    </div>
-  </header>
-
+  <Hero />
   <AboutSection />
   <ServicesSection />
   <ContactUs />
@@ -48,67 +31,7 @@ import Book from "../components/Book/Book.astro";
 </BaseLayout>
 
 <style>
-  .hero {
-    position: relative;
-    display: flex;
-    height: 900px;
-    background-image: url("../assets/images/hero_car.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    height: 100%;
-  }
-
-  .hero__container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
-    width: 100%;
-    gap: 24px;
-  }
-
-  .hero__title,
-  .hero__description {
-    max-width: 560px;
-    color: var(--color-white);
-  }
-
-  .hero__button {
-    margin-top: 16px;
-    background-color: var(--color-white);
-    padding: 12px 24px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .hero__button:hover {
-    background-color: var(--color-gray-100);
-  }
-
   @media screen and (max-width: 768px) {
-    .hero {
-      height: 575px;
-    }
-
-    .hero__title,
-    .hero__description {
-      max-width: 362px;
-    }
-
-    .hero__title {
-      font-size: var(--font-size-h3);
-    }
-
     .mobile-hidden {
       display: none;
     }
