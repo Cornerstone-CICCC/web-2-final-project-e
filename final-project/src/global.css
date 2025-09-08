@@ -182,16 +182,27 @@ h6 {
   font-weight: var(--font-weight-semibold);
 }
 
-.container {
+.container,
+.container.narrow {
   position: relative;
   max-width: 1440px;
-  padding: 112px 64px;
   margin: 0 auto;
+  padding-inline: 64px;
+}
+
+.container {
+  padding-block: 112px;
+}
+
+.container.narrow {
+  padding-block: 80px;
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 24px;
+  .container,
+  .container.narrow {
+    padding-inline: 24px;
+    padding-block: 48px;
   }
 
   h2 {
