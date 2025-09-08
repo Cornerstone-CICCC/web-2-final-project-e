@@ -120,7 +120,7 @@ const items = testimonials;
       margin-top: 64px;
     }
 
-    .testimonials__dot {
+    .testimonials :global(.testimonials__dot) {
       width: 8px;
       height: 8px;
       border-radius: 999px;
@@ -129,7 +129,7 @@ const items = testimonials;
       cursor: pointer;
     }
 
-    .testimonials__dot--active {
+    .testimonials :global(.testimonials__dot--active) {
       background: var(--color-black);
     }
 
@@ -153,4 +153,5 @@ const items = testimonials;
     }
   </style>
 </section>
+
 <script src="./testimonials.ts"></script>
