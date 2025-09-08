@@ -1,0 +1,130 @@
+---
+import { Image } from "astro:assets";
+import { SOCIALS, TEAM } from "./data";
+---
+
+<section class="team" aria-labelledby="team-title">
+  <div class="team__container container">
+    <p class="team__tagline text-regular-semibold">Tagline</p>
+    <h2 class="team__title">Our team</h2>
+    <p class="team__intro text-medium-normal">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </p>
+
+    <div class="team__grid" role="list">
+      {
+        TEAM.map((member) => (
+          <article class="team-card" role="listitem">
+            <div class="team-card__image-wrap">
+              <Image
+                src={member.photo}
+                alt={member.alt}
+                width={560}
+                height={560}
+                class="team-card__image"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="team-card__content">
+              <p class="text-large-semibold team-card__name">{member.name}</p>
+              <p class="text-medium-normal team-card__title ">{member.title}</p>
+
+              <p class="text-regular-normal team-card__desc ">{member.blurb}</p>
+
+              <div class="team-card__socials" aria-label="Social links">
+                {SOCIALS.map((s) => (
+                  <a
+                    class="team-card__social"
+                    href={s.href}
+                    aria-label={s.name}>
+                    <Image src={s.icon} alt="" width={16} height={16} />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .team {
+    background: var(--color-white);
+  }
+
+  .team__container {
+    text-align: center;
+  }
+
+  .team__tagline {
+  }
+
+  .team__title {
+    margin-top: 16px;
+  }
+
+  .team__intro {
+    margin-top: 24px;
+  }
+
+  .team__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 80px;
+    align-items: start;
+  }
+
+  .team-card__image-wrap {
+    overflow: hidden;
+  }
+
+  .team-card__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .team-card__content {
+    text-align: center;
+    padding-top: 24px;
+  }
+
+  .team-card__name {
+  }
+
+  .team-card__title {
+  }
+
+  .team-card__desc {
+    margin-top: 16px;
+  }
+
+  .team-card__desc + .team-card__desc {
+    margin-top: 4px;
+  }
+
+  .team-card__socials {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .team-card__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .team-card__social img {
+    width: 100%;
+    height: 100%;
+  }
+</style>
