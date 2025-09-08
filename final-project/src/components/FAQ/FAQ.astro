@@ -9,7 +9,7 @@ import FaqItem from "./FAQItem.astro";
   <div class="container faq__inner">
     <div class="faq__header">
       <h2>FAQs</h2>
-      <p class="text-medium-normal faq__sub">
+      <p class="text-medium-normal">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
         varius enim in eros elementum tristique.
       </p>
@@ -24,11 +24,16 @@ import FaqItem from "./FAQItem.astro";
     </ul>
 
     <div class="faq__cta">
-      <h4>Still have a question?</h4>
+      <h4 class="faq__cta__title">Still have a question?</h4>
       <p class="text-medium-normal faq__sub">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
-      <Button variant="line" type="button" label="Contact" />
+      <Button
+        variant="line"
+        type="button"
+        isMobileFullWidth={true}
+        label="Contact"
+      />
     </div>
   </div>
 </section>
@@ -64,5 +69,20 @@ import FaqItem from "./FAQItem.astro";
 
   .faq__sub {
     margin: 16px 0 24px;
+  }
+
+  @media (max-width: 768px) {
+    .faq__inner {
+      gap: 48px;
+    }
+
+    .faq__header {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .faq__cta__title {
+      font-size: var(--font-size-h4);
+    }
   }
 </style>
